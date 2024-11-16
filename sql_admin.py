@@ -39,12 +39,12 @@ class DataBase:
             return self.cursor.execute("""DELETE FROM users_right WHERE user_id=(?) AND login=(?) AND username=(?) AND role=(?) AND password=(?)""",
                                        (user_id, login, username, role, password))
 
-    def send_to_left_table(self, user_id, login, username, role, password):
+    def send_to_left_table(self, login, username, role, password):
         with self.connect:
-            return self.cursor.execute("""INSERT INTO users (user_id, login, username, role, password) VALUES (?, ?, ?, ?, ?)""",
-                                       (user_id, login, username, role, password))
+            return self.cursor.execute("""INSERT INTO users (login, username, role, password) VALUES (?, ?, ?, ?)""",
+                                       (login, username, role, password))
 
-    def send_to_right_table(self, user_id, login, username, role, password):
+    def send_to_right_table(self, login, username, role, password):
         with self.connect:
-            return self.cursor.execute("""INSERT INTO users_right (user_id, login, username, role, password) VALUES (?, ?, ?, ?, ?)""",
-                                       (user_id, login, username, role, password))
+            return self.cursor.execute("""INSERT INTO users_right (login, username, role, password) VALUES (?, ?, ?, ?)""",
+                                       (login, username, role, password))

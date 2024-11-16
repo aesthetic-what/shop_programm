@@ -56,8 +56,10 @@ class AdminWindow(QMainWindow):
         selected_user_password = self.model_right.item(row_to_send, 4).text()
         new_row = [QStandardItem(self.model_right.item(row_to_send, col).text())
                    for col in range(self.model_left.columnCount())]
-        self.db.add_user(selected_login,
+        self.db.send_to_left_table(
+                         selected_login,
                          selected_username,
+                         selected_user_role,
                          selected_user_password)
         self.db.delete_user_right(selected_user_id,
                                   selected_login,
@@ -83,7 +85,7 @@ class AdminWindow(QMainWindow):
         new_row = [QStandardItem(self.model_left.item(row_to_send, col).text())
                    for col in range(self.model_left.columnCount())]
 
-        self.db.send_to_right_table(selected_user_id,
+        self.db.send_to_right_table(
                            selected_login,
                            selected_username,
                            selected_user_role,
